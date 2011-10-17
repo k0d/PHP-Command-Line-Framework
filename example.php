@@ -10,15 +10,15 @@ ini_set('display_errors', true);
 ini_set('log_errors', false);
 ini_set('html_errors', false);
 
-require_once(__DIR__.'/lib/class.cli.php');
+require_once(__DIR__.'/lib/class.cli_app.php');
 
-cli::start();
+$app = new cli_app();
 
-cli::title('Welcome to my example script!', COLOR_YELLOW);
-cli::newline();
+$app->title('Welcome to my example script!', COLOR_YELLOW);
+$app->newline();
 
-cli::output('Here is an example table.');
-cli::newline();
+$app->output('Here is an example table.');
+$app->newline();
 
 $headers = array('Country', 'TLD');
 $data = array(
@@ -30,6 +30,4 @@ $data = array(
 	array('Sweden', 'se'),
 	array('United Kingdom', 'uk'),
 );
-cli::table($headers, $data, COLOR_GREEN, COLOR_YELLOW);
-
-cli::end();
+$app->table($headers, $data, COLOR_GREEN, COLOR_YELLOW);

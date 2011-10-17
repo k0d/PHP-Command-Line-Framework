@@ -13,30 +13,30 @@ define('COLOR_WHITE', "\033[0;37m");
 
 define('COLOR_RESET', "\033[0;37m");
 
-class cli {
+class cli_app {
 	
-	static function start() {
+	function __construct() {
 		echo NEWLINE;
 	}
 	
-	static function end() {
+	function _destruct() {
 		echo NEWLINE;
 	}
 
-	static function output($string) {
+	public function output($string) {
 		echo ' '.$string.COLOR_RESET.NEWLINE;
 	}
 
-	static function title($string, $color = COLOR_RESET) {
+	public function title($string, $color = COLOR_RESET) {
 		echo ' '.$color.$string.NEWLINE;
 		echo ' '.str_repeat('-', strlen($string)).COLOR_RESET.NEWLINE;
 	}
 	
-	static function newline() {
+	public function newline() {
 		echo NEWLINE;
 	}
 
-	static function table($headers, $rows, $header_color = COLOR_RESET, $row_color = COLOR_RESET) {
+	public function table($headers, $rows, $header_color = COLOR_RESET, $row_color = COLOR_RESET) {
 		$widths = array();
 		$widths = self::tableCalcWidths($headers, $widths);
 		foreach($rows as $row) {
@@ -55,7 +55,7 @@ class cli {
 		self::output($border);
 	}
 
-	static protected function tableCalcWidths($row, $widths) {
+	protected function tableCalcWidths($row, $widths) {
 		foreach ($row as $column => $value) {
 			$width = strlen($value);
 			if ((isset($widths[$column]) === false) || ($width > $widths[$column])) {
@@ -65,13 +65,12 @@ class cli {
 		return $widths;
 	}
 
-	static protected function tableRow($row, $widths, $value_color = COLOR_RESET) {
+	protected function tableRow($row, $widths, $value_color = COLOR_RESET) {
 		$string = '|';
 		foreach ($row as $column => $value) {
 			$string .= ' '.$value_color.str_pad($value, $widths[$column]).COLOR_RESET.' |';
 		}
 		return $string;
 	}
-
 	
 }
